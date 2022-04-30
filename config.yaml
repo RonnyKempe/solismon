@@ -1,0 +1,10 @@
+name: "solismon"
+description: "Solis Modbus Monitor based on  NosIreland /solismon3"
+version: "1.0.0"
+slug: "solismon"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
