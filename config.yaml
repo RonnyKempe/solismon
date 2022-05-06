@@ -1,6 +1,6 @@
 name: "solismon"
 description: "Solis Modbus Monitor based on  NosIreland /solismon3"
-version: "1.0.0"
+version: "1.0.1"
 slug: "solismon"
 arch:
   - aarch64
