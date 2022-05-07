@@ -32,6 +32,4 @@ schema:
   Inverter1_Dongle_Serial: str
   name: str
   year: int
-MQTT_HOST=$(bashio::services mqtt "host")
-MQTT_USER=$(bashio::services mqtt "username")
-MQTT_PASSWORD=$(bashio::services mqtt "password")
+
