@@ -1,6 +1,6 @@
 name: "solismon"
 description: "Solis Modbus Monitor based on  NosIreland /solismon3"
-version: "1.0.1"
+version: "1.0.2"
 slug: "solismon"
 arch:
   - aarch64
@@ -24,7 +24,7 @@ options:
 schema:
   mqtt_server_ip: str
   mqtt_server_username: str
-  mqtt_server_password: str?
+  mqtt_server_password: password
   MQTT_PORT: int
   MQTT_TOPIC: str 
   mqtt_server_enable: bool
