@@ -12,14 +12,23 @@ startup: before
 ports:
   8000/tcp: 8000
 options:
-  beer: true
-  wine: true
-  liquor: false
-  name: "world"
-  year: 2017
+  mqtt_server_ip: "192.168.0.160"
+  mqtt_server_username: mqtt
+  mqtt_server_password: mqtt
+  MQTT_PORT: 1833
+  MQTT_TOPIC: "solis/METRICS" 
+  mqtt_server_enable: false
+  IP_Inverter1: "192.168.0.128"
+  Inverter1_Dongle_Serial: "123456789"
+  year: 2022
 schema:
-  beer: bool
-  wine: bool
-  liquor: bool
+  mqtt_server_ip: str
+  mqtt_server_username: str
+  mqtt_server_password: str?
+  MQTT_PORT: int
+  MQTT_TOPIC: str 
+  mqtt_server_enable: bool
+  IP_Inverter1: str
+  Inverter1_Dongle_Serial: str
   name: str
   year: int
