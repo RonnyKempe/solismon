@@ -1,6 +1,6 @@
 name: "solismon"
 description: "Solis Modbus Monitor based on  NosIreland /solismon3"
-version: "1.0.3"
+version: "1.0.3a"
 slug: "solismon"
 arch:
   - aarch64
@@ -32,3 +32,6 @@ schema:
   Inverter1_Dongle_Serial: str
   name: str
   year: int
+MQTT_HOST=$(bashio::services mqtt "host")
+MQTT_USER=$(bashio::services mqtt "username")
+MQTT_PASSWORD=$(bashio::services mqtt "password")
