@@ -11,6 +11,8 @@ arch:
 startup: before
 ports:
   8000/tcp: 8000
+services:
+  - mqtt:want
 options:
   MQTT_SERVER_IP: "192.168.0.160"
   MQTT_SERVER_USERNAME: mqtt
