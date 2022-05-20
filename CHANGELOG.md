@@ -1,6 +1,6 @@
 # Changelog
 ## 1.0.3 s
--still in development
+- still in development
 ## 1.0.6 
 - testing scripts
 ## 1.0.7 
