@@ -13,7 +13,7 @@ WORKDIR /data
 
 # Copy data for add-on
 COPY run.sh /
-COPY rhi.py /
+COPY rhi.sh /
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
