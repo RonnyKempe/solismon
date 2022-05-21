@@ -6,7 +6,7 @@ RUN \
   apk add --no-cache \
     python3  \
     py3-pip \
-  && pip3 install umodbus
+  && pip3 install umodbus pysolarmanv5
 
 WORKDIR /data
 #ENV PYTHON_PATH=/usr/local/bin/ \
