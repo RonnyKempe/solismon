@@ -17,5 +17,5 @@ INVERTER2_DONGLE_SERIAL=$(bashio::config 'INVERTER2_DONGLE_SERIAL')
 echo "Solis MQTT Logger"
 echo $MQTT_HOST
 bashio::log.info "Inv1 IP "$INVERTER1_DONGLE_SERIAL
-#python3 /data/rhi.sh
+python3 /data/rhi.sh
 #python3 -m http.server 8000
