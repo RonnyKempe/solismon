@@ -6,11 +6,11 @@ RUN \
   apk add --no-cache \
     python3  \
     py3-pip \
-  && pip3 install umodbus pysolarmanv5
+  && pip3 install umodbus pysolarmanv5 paho-mqtt
 
 WORKDIR /data
 #ENV PYTHON_PATH=/usr/local/bin/ \
-#    PATH="/usr/local/lib/python$PYTHON_VERSION/bin/:/usr/local/lib/pyenv/versions/$PYTHON_VERSION/bin:${PATH}" \
+#    PATH="/usr/local/lib/python$PYTHON_VERSION/bin/:/usr/local/lib/pyenv/versions/$PYTHON_VERSION/bin:${PATH}" 
 # Copy data for add-on
 COPY rootfs / 
  
