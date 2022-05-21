@@ -21,5 +21,6 @@ bashio::log.info "Inv1 Serial "$INVERTER1_DONGLE_SERIAL
 bashio::log.info "MQTT Username "$MQTT_USERNAME
 echo $(ls /data)
 echo $(ls /)
-/data/rhi.sh
+echo $(env)
+/usr/bin/rhi.sh
 #python3 -m http.server 8000
