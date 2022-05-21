@@ -18,4 +18,4 @@ echo "Solis MQTT Logger"
 echo $MQTT_HOST
 bashio::log.info "Inv1 IP "$INVERTER1_DONGLE_SERIAL
 #python3 /data/rhi.sh
-python3 -m http.server 8000
+#python3 -m http.server 8000
