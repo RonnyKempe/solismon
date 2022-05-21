@@ -36,14 +36,14 @@ def main():
 		try:
 			data1("192.168.0.128", 4025953112, 8899)
 		except:
-			logging.info('Fehler1')
+			logging.warning('Fehler1')
 			print('Fehler1')
 			VALID_DATA1=False
 		try:
 			data2("192.168.0.112", 4020737653, 8899)
 		except:
 			print('Fehler2')
-			logging.info('Fehler2')
+			logging.warning('Fehler2')
 			VALID_DATA2=False
 
 		sleep(5)
