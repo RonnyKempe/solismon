@@ -9,7 +9,6 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
 
   # S6-Overlay
   /init ix,
-  /data/** ix,
   /bin/** ix,
   /usr/bin/** ix,
   /run/{s6,s6-rc*,service}/** ix,
@@ -38,7 +37,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
     signal (receive) peer=*_ADDON_SLUG,
 
     # Access to options.json and other files within your addon
-    /data/** rw,
+    /data/** rwx,
 
     # Access to mapped volumes specified in config.json
     /share/** rw,
