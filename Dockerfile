@@ -11,8 +11,8 @@ RUN \
 WORKDIR /data
 
 # Copy data for add-on
-COPY run.sh \
-COPY rhi.sh /data/ \ 
+COPY run.sh 
+COPY rhi.sh /data/  
 RUN chmod a+x /run.sh
 
 
