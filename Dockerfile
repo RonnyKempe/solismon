@@ -12,7 +12,6 @@ WORKDIR /data
 ENV PYTHON_PATH=/usr/local/bin/ \
     PATH="/usr/local/lib/python$PYTHON_VERSION/bin/:/usr/local/lib/pyenv/versions/$PYTHON_VERSION/bin:${PATH}" \
 # Copy data for add-on
-COPY run.sh /
 COPY rootfs /  
 RUN chmod a+x /run.sh
 RUN chmod a+x /usr/bin/rhi.sh
