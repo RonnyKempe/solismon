@@ -37,7 +37,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
     signal (receive) peer=*_ADDON_SLUG,
 
     # Access to options.json and other files within your addon
-    /data/** rwx,
+    /data/** rw,
 
     # Access to mapped volumes specified in config.json
     /share/** rw,
