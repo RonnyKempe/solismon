@@ -3,6 +3,7 @@
 from pysolarmanv5.pysolarmanv5 import PySolarmanV5
 import paho.mqtt.client as mqtt
 from time import sleep
+import logging
 VALID_DATA1=True
 VALID_DATA2=True
 Active_Power1=0
@@ -35,12 +36,14 @@ def main():
 		try:
 			data1("192.168.0.128", 4025953112, 8899)
 		except:
+			logging.info('Fehler1')
 			print('Fehler1')
 			VALID_DATA1=False
 		try:
 			data2("192.168.0.112", 4020737653, 8899)
 		except:
 			print('Fehler2')
+			logging.info('Fehler2')
 			VALID_DATA2=False
 
 		sleep(5)
