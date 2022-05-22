@@ -95,7 +95,6 @@ def data1(IP, SERIAL, PORT):
 		#print(modbus.read_input_register_formatted(register_addr=33144, quantity=1, signed=0, scale=0.1))
 		#print('Battery power')
 		BATTERY_POWER=(modbus1.read_input_register_formatted(register_addr=33149, quantity=2, signed=1))
-		logging.warning('pre harge')
 		mqttc.publish("Solis/Battery/Power", BATTERY_POWER);
 		#print('Total Battery charge')
 		#print(modbus.read_input_register_formatted(register_addr=33161, quantity=2, signed=0))
@@ -137,7 +136,7 @@ def data2(IP, SERIAL, PORT):
 		Active_Power2=(modbus2.read_input_register_formatted(register_addr=3005, quantity=1, signed=0))
 		mqttc.publish("Solis/Power2", Active_Power2);
 		#print('today energy')
-		Today_Production2=(modbus2.read_input_register_formatted(register_addr=3014, quantity=1, signed=0))
+		Today_Production2=(modbus2.read_input_register_formatted(register_addr=3014, quantity=1, signed=0, scale=0.1))
 		mqttc.publish("Solis/Prod2/Today", Today_Production2);
 		#print('yesterday energy')
 		#print(modbus.read_input_registers(register_addr=3015, quantity=1))
