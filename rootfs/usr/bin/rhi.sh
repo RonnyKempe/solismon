@@ -58,7 +58,7 @@ def main(IP1, Ser1, Port1, IP2, Ser2, Port2):
 def data1(IP, SERIAL, PORT):
 	global VALID_DATA1
 	try:
-		modbus1 = PySolarmanV5(IP, SERIAL, port=PORT, mb_slave_id=1, verbose=1)
+		modbus1 = PySolarmanV5(IP, SERIAL, port=PORT, mb_slave_id=1, verbose=0)
 		logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 		Active_Power1=(modbus1.read_input_register_formatted(register_addr=33079, quantity=2, signed=1))
 		mqttc.publish("Solis/Power1", Active_Power1);
