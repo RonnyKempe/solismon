@@ -1,6 +1,6 @@
 name: "solismon"
 description: "Solis Modbus Monitor based on  NosIreland /solismon3"
-version: "1.0.9"
+version: "1.0.10"
 slug: "solismon"
 arch:
   - aarch64
@@ -23,8 +23,10 @@ options:
   MQTT_SERVER_ENABLE: false
   IP_INVERTER1: "192.168.0.128"
   INVERTER1_DONGLE_SERIAL: "123456789"
+  INVERTER1_PORT: 8899
   IP_INVERTER2: "192.168.0.128"
   INVERTER2_DONGLE_SERIAL: "123456789"
+  INVERTER2_PORT: 8899
 schema:
   MQTT_SERVER_IP: str
   MQTT_SERVER_USERNAME: str

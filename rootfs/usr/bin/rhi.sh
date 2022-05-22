@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF8 -*-
 from pysolarmanv5.pysolarmanv5 import PySolarmanV5
+import sys
 import paho.mqtt.client as mqtt
 from time import sleep
 import logging
@@ -35,7 +36,12 @@ MQTT_HOST="192.168.0.211"
 mqttc = mqtt.Client("Solis")
 mqttc.username_pw_set(MQTT_USER, password=PASSWORD)
 mqttc.connect(MQTT_HOST, port=1883)
-
+IP1=sys.argv[1]
+Ser1=sys.argv[2]
+Port1=sys.argv[3]
+IP2=sys.argv[4]
+Ser2=sys.argv[5]
+Port2=sys.argv[6]
 def main(IP1, Ser1, Port1, IP2, Ser2, Port2):
 	while True:
 		try:
@@ -119,7 +125,7 @@ def data1(IP, SERIAL, PORT):
 		mqttc.publish("Solis/Prod1/Today", Today_Production1);
 		#print('Energie Erzeugung gestern')
 		#print(modbus.read_input_register_formatted(register_addr=33036, quantity=1, scale=0.1))
-		Today_Grid_Power_Imported=(modbus1.read_input_register_formatted(register_addr=33171, quantity=1, signed=0)) 
+		Today_Grid_Power_Imported=(modbus1.read_input_register_formatted(register_addr=33171, quantity=1, signed=0, scale=0.1)) 
 		mqttc.publish("Solis/Grid/Imported/Today", Today_Grid_Power_Imported);
 		VALID_DATA1=True
 	finally:
@@ -160,4 +166,5 @@ def data2(IP, SERIAL, PORT):
 		if VALID_DATA2:
 			VALID_DATA2=False
 			
-main("192.168.0.128", 4025953112, 8899, "192.168.0.112", 4020737653, 8899)
+main(IP1, Ser1, Port1, IP2, Ser2, Port2)
+#"192.168.0.128", 4025953112, 8899, "192.168.0.112", 4020737653, 8899
