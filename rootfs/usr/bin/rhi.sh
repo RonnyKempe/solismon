@@ -22,6 +22,11 @@ BATTERY_VOLTAGE_BMS=0
 BATTERY_CURRENT_BMS=0
 BATTERY_POWER=0
 TOTAL_DC_OUTPUT_POWER=0
+Today_Production1=0
+Today_Production2=0
+Today_Battery_Charge=0
+Today_Battery_discharge=0
+Today_Grid_Power_Imported=0
 AKKU_SOC=0
 AKKU_SOH=0
 MQTT_USER="mqtt"
@@ -31,25 +36,27 @@ mqttc = mqtt.Client("Solis")
 mqttc.username_pw_set(MQTT_USER, password=PASSWORD)
 mqttc.connect(MQTT_HOST, port=1883)
 
-def main():
+def main(IP1, Ser1, Port1, IP2, Ser2, Port2):
 	while True:
 		try:
-			data1("192.168.0.128", 4025953112, 8899)
+			data1(IP1, Ser1, Port1)
 		except:
+			logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 			logging.warning('Fehler1')
-			print('Fehler1')
+			global VALID_DATA1
 			VALID_DATA1=False
 		try:
-			data2("192.168.0.112", 4020737653, 8899)
+			data2(IP2, Ser2, Port2)
 		except:
-			print('Fehler2')
+			logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 			logging.warning('Fehler2')
+			global VALID_DATA2
 			VALID_DATA2=False
 
 		sleep(5)
 
 def data1(IP, SERIAL, PORT):
-	
+	global VALID_DATA1
 	try:
 		modbus1 = PySolarmanV5(IP, SERIAL, port=PORT, mb_slave_id=1, verbose=0)
 		Active_Power1=(modbus1.read_input_register_formatted(register_addr=33079, quantity=2, signed=1))
@@ -91,7 +98,8 @@ def data1(IP, SERIAL, PORT):
 		#print('Total Battery charge')
 		#print(modbus.read_input_register_formatted(register_addr=33161, quantity=2, signed=0))
 		#print('Battery charge today')
-		#print(modbus.read_input_register_formatted(register_addr=33163, quantity=1, signed=0, scale=0.1))
+		Today_Battery_Charge=(modbus.read_input_register_formatted(register_addr=33163, quantity=1, signed=0, scale=0.1))
+		mqttc.publish("Solis/Battery/Charge/Today", Today_Battery_Charge);
 		#print('Battery charge yesterday')
 		#print(modbus.read_input_register_formatted(register_addr=33164, quantity=1, signed=0, scale=0.1))
 		#print('Total Battery discharge')
@@ -106,16 +114,19 @@ def data1(IP, SERIAL, PORT):
 		AKKU_SOH=(modbus1.read_input_register_formatted(register_addr=33140, quantity=1))
 		mqttc.publish("Solis/Battery/SOH", AKKU_SOH);   
 		#print('Energie Erzeugung heute')
-		#print(modbus.read_input_register_formatted(register_addr=33035, quantity=1, scale=0.1)) 
+		Today_Production1=(modbus.read_input_register_formatted(register_addr=33035, quantity=1, scale=0.1)) 
+		mqttc.publish("Solis/Prod1/Today", Today_Production1);
 		#print('Energie Erzeugung gestern')
 		#print(modbus.read_input_register_formatted(register_addr=33036, quantity=1, scale=0.1))
+		Today_Grid_Power_Imported=(modbus.read_input_register_formatted(register_addr=33171, quantity=1, signed=0)) 
+		mqttc.publish("Solis/Grid/Imported/Today", Today_Grid_Power_Imported);
 		VALID_DATA1=True
 	finally:
 		if VALID_DATA1:
 			VALID_DATA1=False
 			
 def data2(IP, SERIAL, PORT):
-	
+	global VALID_DATA2
 	try:
 		modbus2 = PySolarmanV5(IP, SERIAL, port=PORT, mb_slave_id=1, verbose=0)
 		#print('PV Power')
@@ -124,7 +135,8 @@ def data2(IP, SERIAL, PORT):
 		Active_Power2=(modbus2.read_input_register_formatted(register_addr=3005, quantity=1, signed=0))
 		mqttc.publish("Solis/Power2", Active_Power2);
 		#print('today energy')
-		#print(modbus.read_input_register_formatted(register_addr=3014, quantity=1, signed=0))
+		Today_Production2=(modbus.read_input_register_formatted(register_addr=3014, quantity=1, signed=0))
+		mqttc.publish("Solis/Prod2/Today", Today_Production2);
 		#print('yesterday energy')
 		#print(modbus.read_input_registers(register_addr=3015, quantity=1))
 		#print('dc1 voltage')
@@ -147,4 +159,4 @@ def data2(IP, SERIAL, PORT):
 		if VALID_DATA2:
 			VALID_DATA2=False
 			
-main()
+main("192.168.0.128", 4025953112, 8899, "192.168.0.112", 4020737653, 8899)
