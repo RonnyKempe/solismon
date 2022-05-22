@@ -42,6 +42,8 @@ Port1=sys.argv[3]
 IP2=sys.argv[4]
 Ser2=sys.argv[5]
 Port2=sys.argv[6]
+print("Args"+IP1+Ser1+Port1+IP2+Ser2+Port2)
+
 def main(IP1, Ser1, Port1, IP2, Ser2, Port2):
 	while True:
 		try:
@@ -63,9 +65,10 @@ def main(IP1, Ser1, Port1, IP2, Ser2, Port2):
 
 def data1(IP, SERIAL, PORT):
 	global VALID_DATA1
+	
 	try:
-		modbus1 = PySolarmanV5(IP, SERIAL, port=PORT, mb_slave_id=1, verbose=0)
 		logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+		modbus1 = PySolarmanV5(IP, serial=int(SERIAL), port=PORT, mb_slave_id=1, verbose=0)
 		Active_Power1=(modbus1.read_input_register_formatted(register_addr=33079, quantity=2, signed=1))
 		mqttc.publish("Solis/Power1", Active_Power1);
 		#print('Inverter Temp °C')
@@ -135,7 +138,7 @@ def data1(IP, SERIAL, PORT):
 def data2(IP, SERIAL, PORT):
 	global VALID_DATA2
 	try:
-		modbus2 = PySolarmanV5(IP, SERIAL, port=PORT, mb_slave_id=1, verbose=0)
+		modbus2 = PySolarmanV5(IP, serial=int(SERIAL), port=PORT, mb_slave_id=1, verbose=0)
 		#print('PV Power')
 		#print(modbus.read_input_register_formatted(register_addr=3007, quantity=1, signed=0))
 		#print('AC Power')
