@@ -101,7 +101,7 @@ def data1(IP, SERIAL, PORT):
 		#print(modbus.read_input_register_formatted(register_addr=33161, quantity=2, signed=0))
 		#print('Battery charge today')
 		logging.warning('pre Today_Battery_Charge')
-		Today_Battery_Charge=(modbus.read_input_register_formatted(register_addr=33163, quantity=1, signed=0, scale=0.1))
+		Today_Battery_Charge=(modbus1.read_input_register_formatted(register_addr=33163, quantity=1, signed=0, scale=0.1))
 		logging.warning('after mod Today_Battery_Charge')
 		mqttc.publish("Solis/Battery/Charge/Today", Today_Battery_Charge);
 		logging.warning('after publish Today_Battery_Charge')
@@ -123,7 +123,7 @@ def data1(IP, SERIAL, PORT):
 		mqttc.publish("Solis/Prod1/Today", Today_Production1);
 		#print('Energie Erzeugung gestern')
 		#print(modbus.read_input_register_formatted(register_addr=33036, quantity=1, scale=0.1))
-		Today_Grid_Power_Imported=(modbus.read_input_register_formatted(register_addr=33171, quantity=1, signed=0)) 
+		Today_Grid_Power_Imported=(modbus1.read_input_register_formatted(register_addr=33171, quantity=1, signed=0)) 
 		mqttc.publish("Solis/Grid/Imported/Today", Today_Grid_Power_Imported);
 		VALID_DATA1=True
 	finally:
@@ -140,7 +140,7 @@ def data2(IP, SERIAL, PORT):
 		Active_Power2=(modbus2.read_input_register_formatted(register_addr=3005, quantity=1, signed=0))
 		mqttc.publish("Solis/Power2", Active_Power2);
 		#print('today energy')
-		Today_Production2=(modbus.read_input_register_formatted(register_addr=3014, quantity=1, signed=0))
+		Today_Production2=(modbus2.read_input_register_formatted(register_addr=3014, quantity=1, signed=0))
 		mqttc.publish("Solis/Prod2/Today", Today_Production2);
 		#print('yesterday energy')
 		#print(modbus.read_input_registers(register_addr=3015, quantity=1))
