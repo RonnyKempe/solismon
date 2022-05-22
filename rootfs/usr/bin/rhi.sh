@@ -58,7 +58,8 @@ def main(IP1, Ser1, Port1, IP2, Ser2, Port2):
 def data1(IP, SERIAL, PORT):
 	global VALID_DATA1
 	try:
-		modbus1 = PySolarmanV5(IP, SERIAL, port=PORT, mb_slave_id=1, verbose=0)
+		modbus1 = PySolarmanV5(IP, SERIAL, port=PORT, mb_slave_id=1, verbose=1)
+		logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 		Active_Power1=(modbus1.read_input_register_formatted(register_addr=33079, quantity=2, signed=1))
 		mqttc.publish("Solis/Power1", Active_Power1);
 		#print('Inverter Temp °C')
@@ -94,11 +95,11 @@ def data1(IP, SERIAL, PORT):
 		#print(modbus.read_input_register_formatted(register_addr=33144, quantity=1, signed=0, scale=0.1))
 		#print('Battery power')
 		BATTERY_POWER=(modbus1.read_input_register_formatted(register_addr=33149, quantity=2, signed=1))
+		logging.warning('pre harge')
 		mqttc.publish("Solis/Battery/Power", BATTERY_POWER);
 		#print('Total Battery charge')
 		#print(modbus.read_input_register_formatted(register_addr=33161, quantity=2, signed=0))
 		#print('Battery charge today')
-		logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 		logging.warning('pre Today_Battery_Charge')
 		Today_Battery_Charge=(modbus.read_input_register_formatted(register_addr=33163, quantity=1, signed=0, scale=0.1))
 		logging.warning('after mod Today_Battery_Charge')
