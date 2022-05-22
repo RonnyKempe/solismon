@@ -100,11 +100,8 @@ def data1(IP, SERIAL, PORT):
 		#print('Total Battery charge')
 		#print(modbus.read_input_register_formatted(register_addr=33161, quantity=2, signed=0))
 		#print('Battery charge today')
-		logging.warning('pre Today_Battery_Charge')
 		Today_Battery_Charge=(modbus1.read_input_register_formatted(register_addr=33163, quantity=1, signed=0, scale=0.1))
-		logging.warning('after mod Today_Battery_Charge')
 		mqttc.publish("Solis/Battery/Charge/Today", Today_Battery_Charge);
-		logging.warning('after publish Today_Battery_Charge')
 		#print('Battery charge yesterday')
 		#print(modbus.read_input_register_formatted(register_addr=33164, quantity=1, signed=0, scale=0.1))
 		#print('Total Battery discharge')
@@ -119,7 +116,7 @@ def data1(IP, SERIAL, PORT):
 		AKKU_SOH=(modbus1.read_input_register_formatted(register_addr=33140, quantity=1))
 		mqttc.publish("Solis/Battery/SOH", AKKU_SOH);   
 		#print('Energie Erzeugung heute')
-		Today_Production1=(modbus.read_input_register_formatted(register_addr=33035, quantity=1, scale=0.1)) 
+		Today_Production1=(modbus1.read_input_register_formatted(register_addr=33035, quantity=1, scale=0.1)) 
 		mqttc.publish("Solis/Prod1/Today", Today_Production1);
 		#print('Energie Erzeugung gestern')
 		#print(modbus.read_input_register_formatted(register_addr=33036, quantity=1, scale=0.1))
